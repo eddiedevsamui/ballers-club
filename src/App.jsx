@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, Users, Wine, Music, Star, CheckCircle, ChevronRight, MapPin, X, Send, Sparkles, Globe } from 'lucide-react';
+import { Calendar, Clock, Users, Wine, Music, Star, CheckCircle, ChevronRight, MapPin, X, Send, Sparkles, Globe, Image as ImageIcon, Phone, Instagram, Facebook, Crown, LayoutGrid, Armchair } from 'lucide-react';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -15,7 +15,6 @@ const App = () => {
   });
   const [isBooked, setIsBooked] = useState(false);
 
-  // Correctly closed useEffect
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       window.Telegram.WebApp.expand();
@@ -30,10 +29,15 @@ const App = () => {
       clubName: "BALLERS RUSSIAN STRIP CLUB",
       location: "Koh Samui",
       openNow: "Open Now",
-      until: "Until 4:00 AM",
+      until: "Daily 9PM - 4AM",
       heroTitle: "Experience the",
       heroGold: "Golden Standard",
       heroSub: "Koh Samui's premier nightlife destination.",
+      tableRes: "Table Reservation",
+      tableNormal: "Normal Table",
+      tableVip: "VIP Sofa",
+      tablePrivate: "Private Section",
+      available: "Available",
       vipServices: "VIP Services",
       selectToBook: "Select to Book",
       back: "Back to Services",
@@ -54,18 +58,28 @@ const App = () => {
       reqSub2: "has been received. Our VIP manager will contact you shortly.",
       resId: "Reservation ID",
       navClub: "CLUB",
-      navEvents: "EVENTS",
-      navProfile: "PROFILE",
-      exclusive: "EXCLUSIVE"
+      navMenu: "MENU",
+      navGallery: "GALLERY",
+      navContact: "CONTACT",
+      exclusive: "EXCLUSIVE",
+      contactTitle: "Get in Touch",
+      socials: "Social Media",
+      locationTitle: "Location",
+      menuTitle: "Premium Bottle Service"
     },
     ru: {
       clubName: "BALLERS РУССКИЙ СТРИП КЛУБ",
       location: "Самуи",
       openNow: "Открыто",
-      until: "До 04:00",
+      until: "Ежедневно 21:00 - 04:00",
       heroTitle: "Почувствуй",
       heroGold: "Золотой Стандарт",
       heroSub: "Главное ночное заведение Самуи.",
+      tableRes: "Бронь Столов",
+      tableNormal: "Обычный Стол",
+      tableVip: "VIP Диван",
+      tablePrivate: "Приватная Секция",
+      available: "Доступно",
       vipServices: "VIP Услуги",
       selectToBook: "Выберите для брони",
       back: "Назад к услугам",
@@ -86,15 +100,64 @@ const App = () => {
       reqSub2: "получен. Наш VIP-менеджер свяжется с вами в ближайшее время.",
       resId: "ID Брони",
       navClub: "КЛУБ",
-      navEvents: "СОБЫТИЯ",
-      navProfile: "ПРОФИЛЬ",
-      exclusive: "ЭКСКЛЮЗИВ"
+      navMenu: "МЕНЮ",
+      navGallery: "ГАЛЕРЕЯ",
+      navContact: "КОНТАКТЫ",
+      exclusive: "ЭКСКЛЮЗИВ",
+      contactTitle: "Связаться с нами",
+      socials: "Соцсети",
+      locationTitle: "Местоположение",
+      menuTitle: "Премиум Алкоголь"
     }
   };
 
   const t = content[lang];
 
-  // Services
+  // Bottle Menu Data
+  const bottles = [
+    { name: "Grey Goose 1.75L", price: "15,000 THB", category: "Vodka" },
+    { name: "Grey Goose 4.5L", price: "65,000 THB", category: "Vodka" },
+    { name: "Hennessy VSOP 70cl", price: "11,000 THB", category: "Cognac" },
+    { name: "Johnnie Walker Blue 75cl", price: "42,000 THB", category: "Whisky" },
+    { name: "Patron Silver 75cl", price: "11,000 THB", category: "Tequila" },
+    { name: "Don Julio 1942 75cl", price: "45,000 THB", category: "Tequila" },
+    { name: "Château Gruaud Larose", price: "15,000 THB", category: "Red Wine" },
+    { name: "Moët & Chandon Magnum 1.5L", price: "18,000 THB", category: "Champagne" },
+    { name: "Moët & Chandon 3L", price: "45,000 THB", category: "Champagne" },
+    { name: "Dom Pérignon 75cl", price: "38,000 THB", category: "Champagne" },
+    { name: "Dom Pérignon 1.5L", price: "75,000 THB", category: "Champagne" },
+    { name: "Armand de Brignac 75cl", price: "50,000 THB", category: "Champagne" }
+  ];
+
+  // Table Data
+  const tables = [
+    {
+      id: 't1',
+      title: t.tableNormal,
+      count: "8",
+      icon: <LayoutGrid className="w-5 h-5" />,
+      description: lang === 'en' ? "Standard high table" : "Стандартный высокий стол",
+      color: "from-neutral-800 to-neutral-900"
+    },
+    {
+      id: 't2',
+      title: t.tableVip,
+      count: "2",
+      icon: <Armchair className="w-5 h-5" />,
+      description: lang === 'en' ? "Premium sofa seating" : "Премиум диваны",
+      color: "from-[#BF953F]/20 to-black"
+    },
+    {
+      id: 't3',
+      title: t.tablePrivate,
+      count: "1",
+      icon: <Crown className="w-5 h-5" />,
+      description: lang === 'en' ? "Exclusive private area" : "Эксклюзивная зона",
+      color: "from-[#BF953F]/40 to-black"
+    }
+  ];
+
+  // Services List
   const services = [
     {
       id: 1,
@@ -137,6 +200,8 @@ const App = () => {
       isPopular: true
     }
   ];
+
+  const galleryImages = Array.from({ length: 20 }, (_, i) => `/slider/${i + 1}.jpg`);
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
@@ -201,6 +266,28 @@ const App = () => {
     </button>
   );
 
+  const TableCard = ({ item }) => (
+    <div 
+        onClick={() => {
+            setSelectedService(item);
+            setActiveTab('booking');
+        }}
+        className={`bg-gradient-to-br ${item.color} rounded-xl p-4 border border-white/10 relative overflow-hidden group cursor-pointer`}
+    >
+        <div className="flex justify-between items-start mb-2">
+            <div className={`p-2 rounded-full bg-black/40 text-[#BF953F]`}>
+                {item.icon}
+            </div>
+            <span className="text-[10px] bg-black/40 px-2 py-1 rounded-full text-gray-300">
+                {item.count} {t.available}
+            </span>
+        </div>
+        <h3 className="font-bold text-white text-sm mb-1">{item.title}</h3>
+        <p className="text-[10px] text-gray-400">{item.description}</p>
+        <div className="absolute inset-0 border-2 border-[#BF953F] opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></div>
+    </div>
+  );
+
   const ServiceCard = ({ service }) => (
     <div 
       onClick={() => {
@@ -262,9 +349,12 @@ const App = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex justify-between items-center gap-2">
         <div className="flex items-center gap-3 flex-1 min-w-0">
-            <div className="w-10 h-10 flex-shrink-0 rounded bg-gradient-to-tr from-[#BF953F] to-[#FBF5B7] flex items-center justify-center text-black font-black text-xs">
-                B
-            </div>
+            {/* Logo Image */}
+            <img 
+                src="/logo.png" 
+                alt="Ballers Logo" 
+                className="w-10 h-10 flex-shrink-0 rounded-lg object-contain bg-black border border-[#BF953F]/30"
+            />
             <div className="flex flex-col min-w-0">
                 <span className="text-[0.65rem] sm:text-xs font-bold tracking-widest uppercase leading-tight text-white truncate">{t.clubName}</span>
                 <span className="text-[0.6rem] text-[#BF953F] tracking-[0.2em] uppercase mt-0.5">{t.location}</span>
@@ -320,6 +410,16 @@ const App = () => {
               </div>
             </div>
 
+            {/* Table Booking Section */}
+            <div className="space-y-4">
+                <h2 className="text-xl font-bold">{t.tableRes}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {tables.map(table => (
+                        <TableCard key={table.id} item={table} />
+                    ))}
+                </div>
+            </div>
+
             {/* Services Grid */}
             <div className="space-y-4">
               <div className="flex justify-between items-end">
@@ -334,6 +434,110 @@ const App = () => {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Menu Tab */}
+        {activeTab === 'menu' && (
+           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+             <div className="flex items-center justify-between mb-6 border-b border-[#BF953F]/30 pb-4">
+               <h2 className="text-2xl font-bold text-white">{t.menuTitle}</h2>
+               <div className="p-2 bg-[#BF953F]/10 rounded-full">
+                  <Wine className="w-6 h-6 text-[#BF953F]" />
+               </div>
+             </div>
+             
+             <div className="space-y-4"> 
+               {bottles.map((bottle, index) => (
+                 <div key={index} className="relative group overflow-hidden rounded-xl bg-neutral-900 border border-white/10 p-4 flex items-center gap-4 transition-all hover:border-[#BF953F]/50 shadow-lg cursor-pointer">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#BF953F]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    
+                    <div className="h-12 w-12 rounded-full bg-black/50 flex items-center justify-center border border-[#BF953F]/20 text-[#BF953F] shrink-0 group-hover:scale-110 transition-transform">
+                       <Wine className="w-5 h-5" />
+                    </div>
+                    
+                    <div className="flex-1 min-w-0 relative z-10">
+                      <h3 className="text-white font-bold text-base mb-0.5 group-hover:text-[#BF953F] transition-colors">{bottle.name}</h3>
+                      <span className="text-[10px] text-gray-500 uppercase tracking-wider font-medium">{bottle.category}</span>
+                    </div>
+                    
+                    <div className="relative z-10">
+                      <div className="text-[#BF953F] font-black text-sm bg-black/80 px-4 py-2 rounded-lg border border-[#BF953F]/30 shadow-[0_0_10px_rgba(191,149,63,0.1)]">
+                        {bottle.price}
+                      </div>
+                    </div>
+                 </div>
+               ))}
+             </div>
+             <p className="text-center text-xs text-gray-500 mt-6 pb-20">Prices include service charge. VAT may apply.</p>
+           </div>
+        )}
+
+        {/* Gallery Tab */}
+        {activeTab === 'gallery' && (
+           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+             <h2 className="text-2xl font-bold mb-6 text-white border-b border-[#BF953F]/30 pb-4 inline-block">{t.navGallery}</h2>
+             <div className="grid grid-cols-2 gap-3">
+               {galleryImages.map((src, index) => (
+                 <div key={index} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group">
+                    <img 
+                      src={src} 
+                      alt={`Gallery ${index + 1}`}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                 </div>
+               ))}
+             </div>
+           </div>
+        )}
+
+        {/* Contact Tab */}
+        {activeTab === 'contact' && (
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6">
+                <h2 className="text-2xl font-bold mb-2 text-white">{t.contactTitle}</h2>
+                
+                {/* Socials Card */}
+                <div className="bg-neutral-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                    <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider mb-4">{t.socials}</h3>
+                    <div className="space-y-4">
+                         <a href="https://instagram.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
+                             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
+                                <Instagram className="w-5 h-5" />
+                             </div>
+                             <span className="font-medium">@ballers.samui</span>
+                         </a>
+                         <a href="https://facebook.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
+                             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
+                                <Facebook className="w-5 h-5" />
+                             </div>
+                             <span className="font-medium">@ballers.samui</span>
+                         </a>
+                    </div>
+                </div>
+
+                {/* Map Card */}
+                <div className="bg-neutral-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                    <div className="flex justify-between items-center mb-4">
+                        <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider">{t.locationTitle}</h3>
+                        <a href="https://maps.app.goo.gl/ogaTcLNGELZu2EMo9" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-white flex items-center gap-1">
+                            Open Map <ChevronRight className="w-3 h-3" />
+                        </a>
+                    </div>
+                    
+                    <div className="rounded-xl overflow-hidden border border-white/10 h-64 w-full bg-neutral-800">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.7262680196727!2d100.063498!3d9.532494200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3054f1be02d931e3%3A0x14a6068864d94e9!2sBallers%20Russian%20Strip%20Club!5e0!3m2!1sen!2sth!4v1768121205417!5m2!1sen!2sth" 
+                            width="100%" 
+                            height="100%" 
+                            style={{border:0}} 
+                            allowFullScreen="" 
+                            loading="lazy" 
+                            referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
         )}
 
         {activeTab === 'booking' && (
@@ -436,22 +640,29 @@ const App = () => {
             onClick={() => setActiveTab('home')}
             className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'home' ? 'text-[#BF953F]' : 'text-gray-500'}`}
         >
-            <Wine className="w-6 h-6" />
+            <Crown className="w-6 h-6" />
             <span className="text-[10px] font-medium tracking-wide">{t.navClub}</span>
         </button>
         <button 
-            onClick={() => {}}
-            className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300 transition-colors"
+            onClick={() => setActiveTab('menu')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'menu' ? 'text-[#BF953F]' : 'text-gray-500'}`}
         >
-            <Music className="w-6 h-6" />
-            <span className="text-[10px] font-medium tracking-wide">{t.navEvents}</span>
+            <Wine className="w-6 h-6" />
+            <span className="text-[10px] font-medium tracking-wide">{t.navMenu}</span>
         </button>
         <button 
-            onClick={() => {}}
-            className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300 transition-colors"
+            onClick={() => setActiveTab('gallery')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'gallery' ? 'text-[#BF953F]' : 'text-gray-500'}`}
         >
-            <Users className="w-6 h-6" />
-            <span className="text-[10px] font-medium tracking-wide">{t.navProfile}</span>
+            <ImageIcon className="w-6 h-6" />
+            <span className="text-[10px] font-medium tracking-wide">{t.navGallery}</span>
+        </button>
+        <button 
+            onClick={() => setActiveTab('contact')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'contact' ? 'text-[#BF953F]' : 'text-gray-500'}`}
+        >
+            <Phone className="w-6 h-6" />
+            <span className="text-[10px] font-medium tracking-wide">{t.navContact}</span>
         </button>
       </nav>
       

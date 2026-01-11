@@ -26,6 +26,8 @@ const App = () => {
   // Content Dictionary
   const content = {
     en: {
+      metaTitle: "Ballers Russian Strip Club - Koh Samui VIP Nightlife",
+      metaDesc: "Experience the Golden Standard of nightlife in Koh Samui. Premium bottle service, stunning models, and private VIP parties. Book your table now.",
       clubName: "BALLERS RUSSIAN STRIP CLUB",
       location: "Koh Samui",
       openNow: "Open Now",
@@ -65,9 +67,14 @@ const App = () => {
       contactTitle: "Get in Touch",
       socials: "Social Media",
       locationTitle: "Location",
-      menuTitle: "Premium Bottle Service"
+      menuTitle: "Premium Bottle Service",
+      recruitTitle: "Become Ballers Girls",
+      recruitSub: "Join our elite team of models and hostesses.",
+      applyBtn: "Apply Now"
     },
     ru: {
+      metaTitle: "Ballers Русский Стрип Клуб - VIP Самуи",
+      metaDesc: "Золотой стандарт ночной жизни на Самуи. Премиальный алкоголь, красивые модели и закрытые VIP вечеринки. Забронируйте стол сейчас.",
       clubName: "BALLERS РУССКИЙ СТРИП КЛУБ",
       location: "Самуи",
       openNow: "Открыто",
@@ -107,7 +114,10 @@ const App = () => {
       contactTitle: "Связаться с нами",
       socials: "Соцсети",
       locationTitle: "Местоположение",
-      menuTitle: "Премиум Алкоголь"
+      menuTitle: "Премиум Алкоголь",
+      recruitTitle: "Стать Моделью Ballers",
+      recruitSub: "Присоединяйтесь к нашей элитной команде.",
+      applyBtn: "Подать Заявку"
     }
   };
 
@@ -343,333 +353,374 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-black font-sans text-white pb-20 selection:bg-[#BF953F] selection:text-black">
+      {/* SEO Configuration - Native React 19 */}
+      <title>{t.metaTitle}</title>
+      <meta name="description" content={t.metaDesc} />
+      <meta name="keywords" content="Koh Samui Nightlife, Russian Club Samui, Strip Club Koh Samui, VIP Party Samui, Ballers Club, Chaweng Nightlife" />
+      <meta name="google-site-verification" content="70TrYsriChPSUZ6E1GX1u8C6CW6wKYLiR8GIZ3ImQSU" />
+      
+      {/* Open Graph / Facebook / LINE */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://apps.ballersviplounge.com/" />
+      <meta property="og:title" content={t.metaTitle} />
+      <meta property="og:description" content={t.metaDesc} />
+      <meta property="og:image" content="https://apps.ballersviplounge.com/hero.jpg" />
+
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content="https://apps.ballersviplounge.com/" />
+      <meta property="twitter:title" content={t.metaTitle} />
+      <meta property="twitter:description" content={t.metaDesc} />
+      <meta property="twitter:image" content="https://apps.ballersviplounge.com/hero.jpg" />
+
       {/* Background Texture */}
       <div className="fixed inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_50%_0%,rgba(191,149,63,0.3),transparent_70%)]"></div>
       
       {/* Header */}
       <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex justify-between items-center gap-2">
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-            {/* Logo Image */}
-            <img 
-                src="/logo.png" 
-                alt="Ballers Logo" 
-                className="w-10 h-10 flex-shrink-0 rounded-lg object-contain bg-black border border-[#BF953F]/30"
-            />
-            <div className="flex flex-col min-w-0">
-                <span className="text-[0.65rem] sm:text-xs font-bold tracking-widest uppercase leading-tight text-white truncate">{t.clubName}</span>
-                <span className="text-[0.6rem] text-[#BF953F] tracking-[0.2em] uppercase mt-0.5">{t.location}</span>
-            </div>
-        </div>
-        
-        <div className="flex items-center gap-2">
-            {/* Language Switcher */}
-            <button 
-                onClick={() => setLang(l => l === 'en' ? 'ru' : 'en')}
-                className="w-10 h-9 flex items-center justify-center rounded-lg border border-[#BF953F]/30 hover:bg-[#BF953F]/10 text-[#BF953F] text-xs font-bold transition-all"
-            >
-                {lang === 'en' ? 'RU' : 'EN'}
-            </button>
-            
-            <a 
-                href="https://maps.app.goo.gl/ogaTcLNGELZu2EMo9" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 flex-shrink-0 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-transparent hover:border-[#BF953F]/30"
-            >
-                <MapPin className="w-5 h-5 text-[#BF953F]" />
-            </a>
-        </div>
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+              {/* Logo Image */}
+              <img 
+                  src="/logo.png" 
+                  alt="Ballers Logo" 
+                  className="w-10 h-10 flex-shrink-0 rounded-lg object-contain bg-black border border-[#BF953F]/30"
+              />
+              <div className="flex flex-col min-w-0">
+                  <span className="text-[0.65rem] sm:text-xs font-bold tracking-widest uppercase leading-tight text-white truncate">{t.clubName}</span>
+                  <span className="text-[0.6rem] text-[#BF953F] tracking-[0.2em] uppercase mt-0.5">{t.location}</span>
+              </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+              {/* Language Switcher */}
+              <button 
+                  onClick={() => setLang(l => l === 'en' ? 'ru' : 'en')}
+                  className="w-10 h-9 flex items-center justify-center rounded-lg border border-[#BF953F]/30 hover:bg-[#BF953F]/10 text-[#BF953F] text-xs font-bold transition-all"
+              >
+                  {lang === 'en' ? 'RU' : 'EN'}
+              </button>
+              
+              <a 
+                  href="https://maps.app.goo.gl/ogaTcLNGELZu2EMo9" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 flex-shrink-0 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-transparent hover:border-[#BF953F]/30"
+              >
+                  <MapPin className="w-5 h-5 text-[#BF953F]" />
+              </a>
+          </div>
       </header>
 
       {/* Main Content */}
       <main className="p-6 relative z-10">
-        {activeTab === 'home' && (
+          {activeTab === 'home' && (
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {/* Hero Section */}
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl border border-white/10">
+              {/* Hero Section */}
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl border border-white/10">
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
               {/* Background Image */}
               <img 
-                src="/hero.jpg" 
-                alt="Luxury Club" 
-                className="absolute inset-0 w-full h-full object-cover"
+                  src="/hero.jpg" 
+                  alt="Luxury Club" 
+                  className="absolute inset-0 w-full h-full object-cover"
               />
               
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                <div className="flex items-center gap-2 mb-2">
-                    <span className="px-2 py-0.5 rounded-full bg-[#BF953F] text-black text-[10px] font-bold uppercase tracking-wider">{t.openNow}</span>
-                    <span className="text-xs text-gray-300 flex items-center gap-1 backdrop-blur-sm bg-black/30 px-2 py-0.5 rounded-full"><Clock className="w-3 h-3" /> {t.until}</span>
-                </div>
-                <h1 className="text-3xl font-bold leading-tight mb-2 drop-shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 rounded-full bg-[#BF953F] text-black text-[10px] font-bold uppercase tracking-wider">{t.openNow}</span>
+                      <span className="text-xs text-gray-300 flex items-center gap-1 backdrop-blur-sm bg-black/30 px-2 py-0.5 rounded-full"><Clock className="w-3 h-3" /> {t.until}</span>
+                  </div>
+                  <h1 className="text-3xl font-bold leading-tight mb-2 drop-shadow-lg">
                   {t.heroTitle} <br/>
                   <GoldGradientText>{t.heroGold}</GoldGradientText>
-                </h1>
-                <p className="text-sm text-gray-200 line-clamp-2 drop-shadow-md">
+                  </h1>
+                  <p className="text-sm text-gray-200 line-clamp-2 drop-shadow-md">
                   {t.heroSub}
-                </p>
+                  </p>
               </div>
-            </div>
+              </div>
 
-            {/* Table Booking Section */}
-            <div className="space-y-4">
-                <h2 className="text-xl font-bold">{t.tableRes}</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {tables.map(table => (
-                        <TableCard key={table.id} item={table} />
-                    ))}
-                </div>
-            </div>
+              {/* Table Booking Section */}
+              <div className="space-y-4">
+                  <h2 className="text-xl font-bold">{t.tableRes}</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {tables.map(table => (
+                          <TableCard key={table.id} item={table} />
+                      ))}
+                  </div>
+              </div>
 
-            {/* Services Grid */}
-            <div className="space-y-4">
+              {/* Services Grid */}
+              <div className="space-y-4">
               <div className="flex justify-between items-end">
-                <h2 className="text-xl font-bold">{t.vipServices}</h2>
-                <span className="text-xs text-[#BF953F] uppercase tracking-wider">{t.selectToBook}</span>
+                  <h2 className="text-xl font-bold">{t.vipServices}</h2>
+                  <span className="text-xs text-[#BF953F] uppercase tracking-wider">{t.selectToBook}</span>
               </div>
               
               <div className="grid gap-4">
-                {services.map(service => (
+                  {services.map(service => (
                   <ServiceCard key={service.id} service={service} />
-                ))}
+                  ))}
               </div>
-            </div>
+              </div>
           </div>
-        )}
+          )}
 
-        {/* Menu Tab */}
-        {activeTab === 'menu' && (
-           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-             <div className="flex items-center justify-between mb-6 border-b border-[#BF953F]/30 pb-4">
-               <h2 className="text-2xl font-bold text-white">{t.menuTitle}</h2>
-               <div className="p-2 bg-[#BF953F]/10 rounded-full">
+          {/* Menu Tab */}
+          {activeTab === 'menu' && (
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="flex items-center justify-between mb-6 border-b border-[#BF953F]/30 pb-4">
+              <h2 className="text-2xl font-bold text-white">{t.menuTitle}</h2>
+              <div className="p-2 bg-[#BF953F]/10 rounded-full">
                   <Wine className="w-6 h-6 text-[#BF953F]" />
-               </div>
-             </div>
-             
-             <div className="space-y-4"> 
-               {bottles.map((bottle, index) => (
-                 <div key={index} className="relative group overflow-hidden rounded-xl bg-neutral-900 border border-white/10 p-4 flex items-center gap-4 transition-all hover:border-[#BF953F]/50 shadow-lg cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#BF953F]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    
-                    <div className="h-12 w-12 rounded-full bg-black/50 flex items-center justify-center border border-[#BF953F]/20 text-[#BF953F] shrink-0 group-hover:scale-110 transition-transform">
-                       <Wine className="w-5 h-5" />
-                    </div>
-                    
-                    <div className="flex-1 min-w-0 relative z-10">
+              </div>
+              </div>
+              
+              <div className="space-y-4"> 
+              {bottles.map((bottle, index) => (
+                  <div key={index} className="relative group overflow-hidden rounded-xl bg-neutral-900 border border-white/10 p-4 flex items-center gap-4 transition-all hover:border-[#BF953F]/50 shadow-lg cursor-pointer">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#BF953F]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      
+                      <div className="h-12 w-12 rounded-full bg-black/50 flex items-center justify-center border border-[#BF953F]/20 text-[#BF953F] shrink-0 group-hover:scale-110 transition-transform">
+                      <Wine className="w-5 h-5" />
+                      </div>
+                      
+                      <div className="flex-1 min-w-0 relative z-10">
                       <h3 className="text-white font-bold text-base mb-0.5 group-hover:text-[#BF953F] transition-colors">{bottle.name}</h3>
                       <span className="text-[10px] text-gray-500 uppercase tracking-wider font-medium">{bottle.category}</span>
-                    </div>
-                    
-                    <div className="relative z-10">
-                      <div className="text-[#BF953F] font-black text-sm bg-black/80 px-4 py-2 rounded-lg border border-[#BF953F]/30 shadow-[0_0_10px_rgba(191,149,63,0.1)]">
-                        {bottle.price}
                       </div>
-                    </div>
-                 </div>
-               ))}
-             </div>
-             <p className="text-center text-xs text-gray-500 mt-6 pb-20">Prices include service charge. VAT may apply.</p>
-           </div>
-        )}
+                      
+                      <div className="relative z-10">
+                      <div className="text-[#BF953F] font-black text-sm bg-black/80 px-4 py-2 rounded-lg border border-[#BF953F]/30 shadow-[0_0_10px_rgba(191,149,63,0.1)]">
+                          {bottle.price}
+                      </div>
+                      </div>
+                  </div>
+              ))}
+              </div>
+              <p className="text-center text-xs text-gray-500 mt-6 pb-20">Prices include service charge. VAT may apply.</p>
+          </div>
+          )}
 
-        {/* Gallery Tab */}
-        {activeTab === 'gallery' && (
-           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-             <h2 className="text-2xl font-bold mb-6 text-white border-b border-[#BF953F]/30 pb-4 inline-block">{t.navGallery}</h2>
-             <div className="grid grid-cols-2 gap-3">
-               {galleryImages.map((src, index) => (
-                 <div key={index} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group">
-                    <img 
+          {/* Gallery Tab */}
+          {activeTab === 'gallery' && (
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <h2 className="text-2xl font-bold mb-6 text-white border-b border-[#BF953F]/30 pb-4 inline-block">{t.navGallery}</h2>
+              <div className="grid grid-cols-2 gap-3">
+              {galleryImages.map((src, index) => (
+                  <div key={index} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group">
+                      <img 
                       src={src} 
                       alt={`Gallery ${index + 1}`}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                 </div>
-               ))}
-             </div>
-           </div>
-        )}
-
-        {/* Contact Tab */}
-        {activeTab === 'contact' && (
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6">
-                <h2 className="text-2xl font-bold mb-2 text-white">{t.contactTitle}</h2>
-                
-                {/* Socials Card */}
-                <div className="bg-neutral-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-                    <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider mb-4">{t.socials}</h3>
-                    <div className="space-y-4">
-                         <a href="https://instagram.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
-                             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
-                                <Instagram className="w-5 h-5" />
-                             </div>
-                             <span className="font-medium">@ballers.samui</span>
-                         </a>
-                         <a href="https://facebook.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
-                             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
-                                <Facebook className="w-5 h-5" />
-                             </div>
-                             <span className="font-medium">@ballers.samui</span>
-                         </a>
-                    </div>
-                </div>
-
-                {/* Map Card */}
-                <div className="bg-neutral-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-                    <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider">{t.locationTitle}</h3>
-                        <a href="https://maps.app.goo.gl/ogaTcLNGELZu2EMo9" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-white flex items-center gap-1">
-                            Open Map <ChevronRight className="w-3 h-3" />
-                        </a>
-                    </div>
-                    
-                    <div className="rounded-xl overflow-hidden border border-white/10 h-64 w-full bg-neutral-800">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.7262680196727!2d100.063498!3d9.532494200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3054f1be02d931e3%3A0x14a6068864d94e9!2sBallers%20Russian%20Strip%20Club!5e0!3m2!1sen!2sth!4v1768121205417!5m2!1sen!2sth" 
-                            width="100%" 
-                            height="100%" 
-                            style={{border:0}} 
-                            allowFullScreen="" 
-                            loading="lazy" 
-                            referrerPolicy="no-referrer-when-downgrade"
-                        ></iframe>
-                    </div>
-                </div>
-            </div>
-        )}
-
-        {activeTab === 'booking' && (
-          <div className="animate-in slide-in-from-right duration-500">
-            <button 
-                onClick={() => setActiveTab('home')}
-                className="mb-6 flex items-center text-gray-400 hover:text-white transition-colors"
-            >
-                <ChevronRight className="w-5 h-5 rotate-180" />
-                <span className="text-sm font-medium">{t.back}</span>
-            </button>
-
-            <h1 className="text-2xl font-bold mb-2">{t.completeRes}</h1>
-            <p className="text-sm text-gray-400 mb-8">
-                {t.requesting} <span className="text-[#BF953F]">{selectedService?.title}</span>
-            </p>
-
-            <form onSubmit={handleBookingSubmit} className="space-y-6">
-                <div className="space-y-4">
-                    <div className="relative group">
-                        <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelName}</label>
-                        <input 
-                            type="text" 
-                            required
-                            className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all"
-                            placeholder={t.placeholderName}
-                            value={formData.name}
-                            onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelDate}</label>
-                            <div className="relative">
-                                <input 
-                                    type="date" 
-                                    required
-                                    className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all [&::-webkit-calendar-picker-indicator]:invert"
-                                    value={formData.date}
-                                    onChange={(e) => setFormData({...formData, date: e.target.value})}
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelGuests}</label>
-                            <div className="relative flex items-center bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden">
-                                <button type="button" onClick={() => setFormData(p => ({...p, guests: Math.max(1, p.guests - 1)}))} className="p-4 hover:bg-white/5 text-[#BF953F]">-</button>
-                                <input 
-                                    type="number" 
-                                    readOnly
-                                    className="w-full bg-transparent text-center text-white focus:outline-none"
-                                    value={formData.guests}
-                                />
-                                <button type="button" onClick={() => setFormData(p => ({...p, guests: p.guests + 1}))} className="p-4 hover:bg-white/5 text-[#BF953F]">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelPhone}</label>
-                        <input 
-                            type="tel" 
-                            required
-                            className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all"
-                            placeholder={t.placeholderPhone}
-                            value={formData.phone}
-                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        />
-                    </div>
-
-                    <div>
-                        <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelNotes}</label>
-                        <textarea 
-                            rows="3"
-                            className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all resize-none"
-                            placeholder={t.placeholderNotes}
-                            value={formData.notes}
-                            onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                        />
-                    </div>
-                </div>
-
-                <div className="pt-4 pb-8">
-                    <GoldButton type="submit">
-                        {t.btnConfirm} <Send className="w-4 h-4 ml-1" />
-                    </GoldButton>
-                    <p className="text-center text-xs text-gray-500 mt-4">
-                        {t.paymentNote}
-                    </p>
-                </div>
-            </form>
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+              ))}
+              </div>
           </div>
-        )}
+          )}
+
+          {/* Contact Tab */}
+          {activeTab === 'contact' && (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6">
+                  <h2 className="text-2xl font-bold mb-2 text-white">{t.contactTitle}</h2>
+                  
+                  {/* Socials Card */}
+                  <div className="bg-neutral-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                      <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider mb-4">{t.socials}</h3>
+                      <div className="space-y-4">
+                          <a href="https://instagram.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
+                              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
+                                  <Instagram className="w-5 h-5" />
+                              </div>
+                              <span className="font-medium">@ballers.samui</span>
+                          </a>
+                          <a href="https://facebook.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
+                              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
+                                  <Facebook className="w-5 h-5" />
+                              </div>
+                              <span className="font-medium">@ballers.samui</span>
+                          </a>
+                          <a href="https://t.me/ballersclubbot" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
+                              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
+                                  <Send className="w-5 h-5" />
+                              </div>
+                              <span className="font-medium">Telegram Bot</span>
+                          </a>
+                      </div>
+                  </div>
+
+                  {/* Recruitment Card */}
+                  <div className="bg-gradient-to-br from-neutral-900 to-black border border-[#BF953F]/30 rounded-2xl p-6 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-[#BF953F]/10 rounded-full blur-xl"></div>
+                      <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider mb-2">{t.recruitTitle}</h3>
+                      <p className="text-gray-400 text-xs mb-4">{t.recruitSub}</p>
+                      <a 
+                          href="https://wa.me/66943679730" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center w-full py-3 rounded-xl font-bold text-black bg-gradient-to-r from-[#BF953F] via-[#FBF5B7] to-[#AA771C] hover:shadow-[0_0_15px_rgba(191,149,63,0.3)] transition-all"
+                      >
+                          {t.applyBtn}
+                      </a>
+                  </div>
+
+                  {/* Map Card */}
+                  <div className="bg-neutral-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                      <div className="flex justify-between items-center mb-4">
+                          <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider">{t.locationTitle}</h3>
+                          <a href="https://maps.app.goo.gl/ogaTcLNGELZu2EMo9" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-white flex items-center gap-1">
+                              Open Map <ChevronRight className="w-3 h-3" />
+                          </a>
+                      </div>
+                      
+                      <div className="rounded-xl overflow-hidden border border-white/10 h-64 w-full bg-neutral-800">
+                          <iframe 
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.7262680196727!2d100.063498!3d9.532494200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3054f1be02d931e3%3A0x14a6068864d94e9!2sBallers%20Russian%20Strip%20Club!5e0!3m2!1sen!2sth!4v1768121205417!5m2!1sen!2sth" 
+                              width="100%" 
+                              height="100%" 
+                              style={{border:0}} 
+                              allowFullScreen="" 
+                              loading="lazy" 
+                              referrerPolicy="no-referrer-when-downgrade"
+                          ></iframe>
+                      </div>
+                  </div>
+              </div>
+          )}
+
+          {activeTab === 'booking' && (
+          <div className="animate-in slide-in-from-right duration-500">
+              <button 
+                  onClick={() => setActiveTab('home')}
+                  className="mb-6 flex items-center text-gray-400 hover:text-white transition-colors"
+              >
+                  <ChevronRight className="w-5 h-5 rotate-180" />
+                  <span className="text-sm font-medium">{t.back}</span>
+              </button>
+
+              <h1 className="text-2xl font-bold mb-2">{t.completeRes}</h1>
+              <p className="text-sm text-gray-400 mb-8">
+                  {t.requesting} <span className="text-[#BF953F]">{selectedService?.title}</span>
+              </p>
+
+              <form onSubmit={handleBookingSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                      <div className="relative group">
+                          <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelName}</label>
+                          <input 
+                              type="text" 
+                              required
+                              className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all"
+                              placeholder={t.placeholderName}
+                              value={formData.name}
+                              onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                          <div>
+                              <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelDate}</label>
+                              <div className="relative">
+                                  <input 
+                                      type="date" 
+                                      required
+                                      className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all [&::-webkit-calendar-picker-indicator]:invert"
+                                      value={formData.date}
+                                      onChange={(e) => setFormData({...formData, date: e.target.value})}
+                                  />
+                              </div>
+                          </div>
+                          <div>
+                              <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelGuests}</label>
+                              <div className="relative flex items-center bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden">
+                                  <button type="button" onClick={() => setFormData(p => ({...p, guests: Math.max(1, p.guests - 1)}))} className="p-4 hover:bg-white/5 text-[#BF953F]">-</button>
+                                  <input 
+                                      type="number" 
+                                      readOnly
+                                      className="w-full bg-transparent text-center text-white focus:outline-none"
+                                      value={formData.guests}
+                                  />
+                                  <button type="button" onClick={() => setFormData(p => ({...p, guests: p.guests + 1}))} className="p-4 hover:bg-white/5 text-[#BF953F]">+</button>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div>
+                          <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelPhone}</label>
+                          <input 
+                              type="tel" 
+                              required
+                              className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all"
+                              placeholder={t.placeholderPhone}
+                              value={formData.phone}
+                              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          />
+                      </div>
+
+                      <div>
+                          <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelNotes}</label>
+                          <textarea 
+                              rows="3"
+                              className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all resize-none"
+                              placeholder={t.placeholderNotes}
+                              value={formData.notes}
+                              onChange={(e) => setFormData({...formData, notes: e.target.value})}
+                          />
+                      </div>
+                  </div>
+
+                  <div className="pt-4 pb-8">
+                      <GoldButton type="submit">
+                          {t.btnConfirm} <Send className="w-4 h-4 ml-1" />
+                      </GoldButton>
+                      <p className="text-center text-xs text-gray-500 mt-4">
+                          {t.paymentNote}
+                      </p>
+                  </div>
+              </form>
+          </div>
+          )}
       </main>
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-white/10 px-6 py-4 flex justify-around z-50 pb-safe">
-        <button 
-            onClick={() => setActiveTab('home')}
-            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'home' ? 'text-[#BF953F]' : 'text-gray-500'}`}
-        >
-            <Crown className="w-6 h-6" />
-            <span className="text-[10px] font-medium tracking-wide">{t.navClub}</span>
-        </button>
-        <button 
-            onClick={() => setActiveTab('menu')}
-            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'menu' ? 'text-[#BF953F]' : 'text-gray-500'}`}
-        >
-            <Wine className="w-6 h-6" />
-            <span className="text-[10px] font-medium tracking-wide">{t.navMenu}</span>
-        </button>
-        <button 
-            onClick={() => setActiveTab('gallery')}
-            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'gallery' ? 'text-[#BF953F]' : 'text-gray-500'}`}
-        >
-            <ImageIcon className="w-6 h-6" />
-            <span className="text-[10px] font-medium tracking-wide">{t.navGallery}</span>
-        </button>
-        <button 
-            onClick={() => setActiveTab('contact')}
-            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'contact' ? 'text-[#BF953F]' : 'text-gray-500'}`}
-        >
-            <Phone className="w-6 h-6" />
-            <span className="text-[10px] font-medium tracking-wide">{t.navContact}</span>
-        </button>
+          <button 
+              onClick={() => setActiveTab('home')}
+              className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'home' ? 'text-[#BF953F]' : 'text-gray-500'}`}
+          >
+              <Crown className="w-6 h-6" />
+              <span className="text-[10px] font-medium tracking-wide">{t.navClub}</span>
+          </button>
+          <button 
+              onClick={() => setActiveTab('menu')}
+              className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'menu' ? 'text-[#BF953F]' : 'text-gray-500'}`}
+          >
+              <Wine className="w-6 h-6" />
+              <span className="text-[10px] font-medium tracking-wide">{t.navMenu}</span>
+          </button>
+          <button 
+              onClick={() => setActiveTab('gallery')}
+              className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'gallery' ? 'text-[#BF953F]' : 'text-gray-500'}`}
+          >
+              <ImageIcon className="w-6 h-6" />
+              <span className="text-[10px] font-medium tracking-wide">{t.navGallery}</span>
+          </button>
+          <button 
+              onClick={() => setActiveTab('contact')}
+              className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'contact' ? 'text-[#BF953F]' : 'text-gray-500'}`}
+          >
+              <Phone className="w-6 h-6" />
+              <span className="text-[10px] font-medium tracking-wide">{t.navContact}</span>
+          </button>
       </nav>
       
       <style>{`
-        .pb-safe {
-            padding-bottom: env(safe-area-inset-bottom, 20px);
-        }
+          .pb-safe {
+              padding-bottom: env(safe-area-inset-bottom, 20px);
+          }
       `}</style>
     </div>
   );

@@ -412,63 +412,77 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="p-6 relative z-10">
+      <main className="relative z-10 pb-20">
           {activeTab === 'home' && (
-          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              {/* Hero Section */}
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl border border-white/10">
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
-              {/* Background Image */}
-              <img 
-                  src="/hero.jpg" 
-                  alt="Luxury Club" 
-                  className="absolute inset-0 w-full h-full object-cover"
-              />
-              
-              <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                  <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 rounded-full bg-[#BF953F] text-black text-[10px] font-bold uppercase tracking-wider">{t.openNow}</span>
-                      <span className="text-xs text-gray-300 flex items-center gap-1 backdrop-blur-sm bg-black/30 px-2 py-0.5 rounded-full"><Clock className="w-3 h-3" /> {t.until}</span>
-                  </div>
-                  <h1 className="text-3xl font-bold leading-tight mb-2 drop-shadow-lg">
-                  {t.heroTitle} <br/>
-                  <GoldGradientText>{t.heroGold}</GoldGradientText>
-                  </h1>
-                  <p className="text-sm text-gray-200 line-clamp-2 drop-shadow-md">
-                  {t.heroSub}
-                  </p>
-              </div>
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+              {/* Hero Section - Full Width & Immersive */}
+              <div className="relative h-[75vh] min-h-[500px] w-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
+                <img 
+                    src="/hero.jpg" 
+                    alt="Luxury Club" 
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+                
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 pb-16">
+                    <h1 className="text-4xl sm:text-5xl font-black leading-tight mb-2 drop-shadow-2xl uppercase italic tracking-tighter">
+                    {t.heroTitle} <br/>
+                    <GoldGradientText>{t.heroGold}</GoldGradientText>
+                    </h1>
+                    <p className="text-sm sm:text-base text-gray-200 line-clamp-2 drop-shadow-md max-w-[90%]">
+                    {t.heroSub}
+                    </p>
+                </div>
               </div>
 
-              {/* Table Booking Section */}
-              <div className="space-y-4">
-                  <h2 className="text-xl font-bold">{t.tableRes}</h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {tables.map(table => (
-                          <TableCard key={table.id} item={table} />
-                      ))}
-                  </div>
+              {/* Open Hours Bar - Sticky below Header style but placed after hero */}
+              <div className="bg-neutral-900 border-y border-[#BF953F]/20 py-4 px-6 flex items-center justify-between">
+                 <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-[#BF953F]/10 text-[#BF953F]">
+                        <Clock className="w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Open Hours</span>
+                        <span className="text-sm text-white font-medium">{t.until}</span>
+                    </div>
+                 </div>
+                 <span className="px-3 py-1 rounded-full bg-[#BF953F] text-black text-[10px] font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(191,149,63,0.4)] animate-pulse">
+                    {t.openNow}
+                 </span>
               </div>
 
-              {/* Services Grid */}
-              <div className="space-y-4">
-              <div className="flex justify-between items-end">
-                  <h2 className="text-xl font-bold">{t.vipServices}</h2>
-                  <span className="text-xs text-[#BF953F] uppercase tracking-wider">{t.selectToBook}</span>
-              </div>
-              
-              <div className="grid gap-4">
-                  {services.map(service => (
-                  <ServiceCard key={service.id} service={service} />
-                  ))}
-              </div>
+              {/* Padded Content Section */}
+              <div className="p-6 space-y-8">
+                {/* Table Booking Section */}
+                <div className="space-y-4">
+                    <h2 className="text-xl font-bold">{t.tableRes}</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {tables.map(table => (
+                            <TableCard key={table.id} item={table} />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Services Grid */}
+                <div className="space-y-4">
+                    <div className="flex justify-between items-end">
+                        <h2 className="text-xl font-bold">{t.vipServices}</h2>
+                        <span className="text-xs text-[#BF953F] uppercase tracking-wider">{t.selectToBook}</span>
+                    </div>
+                    
+                    <div className="grid gap-4">
+                        {services.map(service => (
+                        <ServiceCard key={service.id} service={service} />
+                        ))}
+                    </div>
+                </div>
               </div>
           </div>
           )}
 
           {/* Menu Tab */}
           {activeTab === 'menu' && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="p-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="flex items-center justify-between mb-6 border-b border-[#BF953F]/30 pb-4">
               <h2 className="text-2xl font-bold text-white">{t.menuTitle}</h2>
               <div className="p-2 bg-[#BF953F]/10 rounded-full">
@@ -504,7 +518,7 @@ const App = () => {
 
           {/* Gallery Tab */}
           {activeTab === 'gallery' && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="p-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <h2 className="text-2xl font-bold mb-6 text-white border-b border-[#BF953F]/30 pb-4 inline-block">{t.navGallery}</h2>
               <div className="grid grid-cols-2 gap-3">
               {galleryImages.map((src, index) => (
@@ -524,7 +538,7 @@ const App = () => {
 
           {/* Contact Tab */}
           {activeTab === 'contact' && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6">
+              <div className="p-6 animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6">
                   <h2 className="text-2xl font-bold mb-2 text-white">{t.contactTitle}</h2>
                   
                   {/* Socials Card */}
@@ -535,19 +549,19 @@ const App = () => {
                               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
                                   <Instagram className="w-5 h-5" />
                               </div>
-                              <span className="font-medium">@ballers.samui</span>
+                              <span className="font-medium">INSTAGRAM</span>
                           </a>
                           <a href="https://facebook.com/ballers.samui" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
                               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
                                   <Facebook className="w-5 h-5" />
                               </div>
-                              <span className="font-medium">@ballers.samui</span>
+                              <span className="font-medium">FACEBOOK</span>
                           </a>
                           <a href="https://t.me/ballersclubbot" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white hover:text-[#BF953F] transition-colors group">
                               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#BF953F]/20 transition-colors">
                                   <Send className="w-5 h-5" />
                               </div>
-                              <span className="font-medium">Telegram Bot</span>
+                              <span className="font-medium">TELEGRAM</span>
                           </a>
                       </div>
                   </div>
@@ -557,6 +571,12 @@ const App = () => {
                       <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-[#BF953F]/10 rounded-full blur-xl"></div>
                       <h3 className="text-[#BF953F] text-sm font-bold uppercase tracking-wider mb-2">{t.recruitTitle}</h3>
                       <p className="text-gray-400 text-xs mb-4">{t.recruitSub}</p>
+                      
+                      {/* Recruitment Image */}
+                      <div className="mb-4 rounded-xl overflow-hidden border border-white/10">
+                          <img src="/become.jpg" alt="Become a Ballers Girl" className="w-full h-auto object-cover" />
+                      </div>
+
                       <a 
                           href="https://wa.me/66943679730" 
                           target="_blank" 
@@ -592,7 +612,7 @@ const App = () => {
           )}
 
           {activeTab === 'booking' && (
-          <div className="animate-in slide-in-from-right duration-500">
+          <div className="p-6 animate-in slide-in-from-right duration-500">
               <button 
                   onClick={() => setActiveTab('home')}
                   className="mb-6 flex items-center text-gray-400 hover:text-white transition-colors"

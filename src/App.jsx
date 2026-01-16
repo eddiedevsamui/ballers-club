@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, Users, Wine, Music, Star, CheckCircle, ChevronRight, MapPin, X, Send, Sparkles, Globe, Image as ImageIcon, Phone, Instagram, Facebook, Crown, LayoutGrid, Armchair } from 'lucide-react';
+import { Calendar, Clock, Users, Wine, Music, Star, CheckCircle, ChevronRight, MapPin, X, Send, Sparkles, Globe, Image as ImageIcon, Phone, Instagram, Facebook, Crown, LayoutGrid, Armchair, Heart, Shirt, Info, Speaker } from 'lucide-react';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -9,6 +9,7 @@ const App = () => {
   const [formData, setFormData] = useState({
     name: '',
     date: '',
+    time: '', // Added time field
     guests: 2,
     phone: '',
     notes: ''
@@ -39,6 +40,7 @@ const App = () => {
       tableNormal: "Normal Table",
       tableVip: "VIP Sofa",
       tablePrivate: "Private Section",
+      tableDance: "Private Lap Dance",
       available: "Available",
       vipServices: "VIP Services",
       selectToBook: "Select to Book",
@@ -47,6 +49,7 @@ const App = () => {
       requesting: "Requesting:",
       labelName: "Full Name",
       labelDate: "Date",
+      labelTime: "Arrival Time",
       labelGuests: "Guests",
       labelPhone: "Telegram / Phone",
       labelNotes: "Special Requests",
@@ -70,7 +73,13 @@ const App = () => {
       menuTitle: "Premium Bottle Service",
       recruitTitle: "Become Ballers Girls",
       recruitSub: "Join our elite team of models and hostesses.",
-      applyBtn: "Apply Now"
+      applyBtn: "Apply Now",
+      dressCodeTitle: "Dress Code",
+      dressCodeText: "Smart Casual. No beachwear.",
+      musicTitle: "Music Policy",
+      musicText: "Hip-Hop / House",
+      ageTitle: "Age Limit",
+      ageText: "20+ ID Required"
     },
     ru: {
       metaTitle: "Ballers Русский Стрип Клуб - VIP Самуи",
@@ -86,6 +95,7 @@ const App = () => {
       tableNormal: "Обычный Стол",
       tableVip: "VIP Диван",
       tablePrivate: "Приватная Секция",
+      tableDance: "Приватный Танец",
       available: "Доступно",
       vipServices: "VIP Услуги",
       selectToBook: "Выберите для брони",
@@ -94,6 +104,7 @@ const App = () => {
       requesting: "Запрос:",
       labelName: "Ваше Имя",
       labelDate: "Дата",
+      labelTime: "Время прибытия",
       labelGuests: "Гости",
       labelPhone: "Telegram / Телефон",
       labelNotes: "Особые пожелания",
@@ -117,7 +128,13 @@ const App = () => {
       menuTitle: "Премиум Алкоголь",
       recruitTitle: "Стать Моделью Ballers",
       recruitSub: "Присоединяйтесь к нашей элитной команде.",
-      applyBtn: "Подать Заявку"
+      applyBtn: "Подать Заявку",
+      dressCodeTitle: "Дресс-код",
+      dressCodeText: "Smart Casual. Без пляжной одежды.",
+      musicTitle: "Музыка",
+      musicText: "Hip-Hop / House",
+      ageTitle: "Возраст",
+      ageText: "20+ Документы"
     }
   };
 
@@ -164,6 +181,14 @@ const App = () => {
       icon: <Crown className="w-5 h-5" />,
       description: lang === 'en' ? "Exclusive private area" : "Эксклюзивная зона",
       color: "from-[#BF953F]/40 to-black"
+    },
+    {
+      id: 't4',
+      title: t.tableDance,
+      count: "3",
+      icon: <Heart className="w-5 h-5" />,
+      description: lang === 'en' ? "Intimate 1-on-1 experience" : "Интимный опыт 1-на-1",
+      color: "from-[#BF953F]/10 to-neutral-900"
     }
   ];
 
@@ -238,7 +263,7 @@ const App = () => {
                 setIsBooked(false);
                 setSelectedService(null);
                 setActiveTab('home');
-                setFormData({ name: '', date: '', guests: 2, phone: '', notes: '' });
+                setFormData({ name: '', date: '', time: '', guests: 2, phone: '', notes: '' });
             }, 3000);
         } else {
             alert("Connection Error. Please try again.");
@@ -566,6 +591,25 @@ const App = () => {
                       </div>
                   </div>
 
+                  {/* Club Policies Grid */}
+                  <div className="grid grid-cols-3 gap-3">
+                      <div className="bg-neutral-900/50 border border-white/10 rounded-xl p-3 text-center flex flex-col items-center">
+                          <Shirt className="w-5 h-5 text-[#BF953F] mb-2" />
+                          <span className="text-[10px] uppercase text-gray-500 font-bold mb-1">{t.dressCodeTitle}</span>
+                          <span className="text-[10px] text-white leading-tight">{t.dressCodeText}</span>
+                      </div>
+                      <div className="bg-neutral-900/50 border border-white/10 rounded-xl p-3 text-center flex flex-col items-center">
+                          <Speaker className="w-5 h-5 text-[#BF953F] mb-2" />
+                          <span className="text-[10px] uppercase text-gray-500 font-bold mb-1">{t.musicTitle}</span>
+                          <span className="text-[10px] text-white leading-tight">{t.musicText}</span>
+                      </div>
+                      <div className="bg-neutral-900/50 border border-white/10 rounded-xl p-3 text-center flex flex-col items-center">
+                          <Users className="w-5 h-5 text-[#BF953F] mb-2" />
+                          <span className="text-[10px] uppercase text-gray-500 font-bold mb-1">{t.ageTitle}</span>
+                          <span className="text-[10px] text-white leading-tight">{t.ageText}</span>
+                      </div>
+                  </div>
+
                   {/* Recruitment Card */}
                   <div className="bg-gradient-to-br from-neutral-900 to-black border border-[#BF953F]/30 rounded-2xl p-6 relative overflow-hidden">
                       <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-[#BF953F]/10 rounded-full blur-xl"></div>
@@ -654,17 +698,30 @@ const App = () => {
                               </div>
                           </div>
                           <div>
-                              <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelGuests}</label>
-                              <div className="relative flex items-center bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden">
-                                  <button type="button" onClick={() => setFormData(p => ({...p, guests: Math.max(1, p.guests - 1)}))} className="p-4 hover:bg-white/5 text-[#BF953F]">-</button>
+                              <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelTime}</label>
+                              <div className="relative">
                                   <input 
-                                      type="number" 
-                                      readOnly
-                                      className="w-full bg-transparent text-center text-white focus:outline-none"
-                                      value={formData.guests}
+                                      type="time" 
+                                      required
+                                      className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#BF953F] focus:ring-1 focus:ring-[#BF953F] transition-all [&::-webkit-calendar-picker-indicator]:invert"
+                                      value={formData.time}
+                                      onChange={(e) => setFormData({...formData, time: e.target.value})}
                                   />
-                                  <button type="button" onClick={() => setFormData(p => ({...p, guests: p.guests + 1}))} className="p-4 hover:bg-white/5 text-[#BF953F]">+</button>
                               </div>
+                          </div>
+                      </div>
+
+                      <div>
+                          <label className="text-xs font-medium text-[#BF953F] uppercase tracking-wider mb-1 block ml-1">{t.labelGuests}</label>
+                          <div className="relative flex items-center bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden">
+                              <button type="button" onClick={() => setFormData(p => ({...p, guests: Math.max(1, p.guests - 1)}))} className="p-4 hover:bg-white/5 text-[#BF953F]">-</button>
+                              <input 
+                                  type="number" 
+                                  readOnly
+                                  className="w-full bg-transparent text-center text-white focus:outline-none"
+                                  value={formData.guests}
+                              />
+                              <button type="button" onClick={() => setFormData(p => ({...p, guests: p.guests + 1}))} className="p-4 hover:bg-white/5 text-[#BF953F]">+</button>
                           </div>
                       </div>
 
@@ -692,7 +749,16 @@ const App = () => {
                       </div>
                   </div>
 
-                  <div className="pt-4 pb-8">
+                  <div className="pt-2 pb-8">
+                      {/* Dress Code Notice */}
+                      <div className="bg-[#BF953F]/10 border border-[#BF953F]/20 rounded-lg p-3 flex gap-3 items-start mb-4">
+                          <Info className="w-4 h-4 text-[#BF953F] mt-0.5 flex-shrink-0" />
+                          <div className="text-xs text-gray-300">
+                              <span className="text-[#BF953F] font-bold block mb-0.5 uppercase tracking-wide">{t.dressCodeTitle}</span>
+                              {t.dressCodeText}
+                          </div>
+                      </div>
+
                       <GoldButton type="submit">
                           {t.btnConfirm} <Send className="w-4 h-4 ml-1" />
                       </GoldButton>
